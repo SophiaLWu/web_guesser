@@ -13,5 +13,16 @@
         The SECRET NUMBER is <%= secret_number %>
       </p>
     <% end %>
+    <style>
+      body {
+        <% if message == "Way too high!" || message == "Way too low!" %>
+          background: red;
+        <% elsif message == "Too high!" || message == "Too low!" %>
+          background: #FBDFDF;
+        <% elsif message == "You got it right!" %>
+          background: green;
+        <% end %>
+      }
+    </style>
   </body>
 </html>

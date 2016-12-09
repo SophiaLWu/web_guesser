@@ -23,8 +23,10 @@ end
 
 get "/" do
   guess = params["guess"].to_i
+  cheat_mode = params["cheat"]
   message = check_guess(guess, settings.secret_number)
   erb :index, :locals => {:guess => guess,
                           :message => message,
-                          :secret_number => settings.secret_number}
+                          :secret_number => settings.secret_number,
+                          :cheat_mode => cheat_mode}
 end

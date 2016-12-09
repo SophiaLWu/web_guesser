@@ -6,6 +6,9 @@
       <input type="submit" value="Guess!" />
     </form>
     <p>
+      Guesses left: <%= guesses_left %>
+    </p>
+    <p>
       <%= message %>
     </p>
     <% if guess == secret_number || cheat_mode == "true" %>

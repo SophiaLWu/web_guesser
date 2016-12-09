@@ -2,6 +2,7 @@ require "sinatra"
 require "sinatra/reloader"
 
 set :secret_number, rand(100)
+@@guesses_left = 5
 
 def check_guess(guess, secret_number)
   if guess > secret_number
@@ -25,8 +26,17 @@ get "/" do
   guess = params["guess"].to_i
   cheat_mode = params["cheat"]
   message = check_guess(guess, settings.secret_number)
+  @@guesses_left -= 1
+  if @@guesses_left == 0 || message == "You got it right!"
+    settings.secret_number = rand(100)
+    @@guesses_left = 5
+    if message != "You got it right!"
+      message = "You lost! There is now a new secret number."
+    end
+  end
   erb :index, :locals => {:guess => guess,
                           :message => message,
                           :secret_number => settings.secret_number,
-                          :cheat_mode => cheat_mode}
+                          :cheat_mode => cheat_mode,
+                          :guesses_left => @@guesses_left}
 end
